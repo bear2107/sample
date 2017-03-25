@@ -64,15 +64,15 @@ func (t *CrowdFundChaincode) Invoke(stub shim.ChaincodeStubInterface, function s
         // Any error to be reported back to the client
         var err error
 
-        var value int
+       // var value int
 
         if len(args) != 3 {
                 return nil, errors.New("Incorrect number of arguments. Expecting 2.")
         }
-                value, err = strconv.Atoi(args[2])
-        if err != nil {
-                return nil, errors.New("Invalid count value, expecting a integer value.")
-        }
+         //       value, err = strconv.Atoi(args[2])
+        //if err != nil {
+          //      return nil, errors.New("Invalid count value, expecting a integer value.")
+        //}
         // Read in the name of the state variable to be updated
         account = args[0]
         newinfo := Info{
@@ -122,12 +122,12 @@ func (t *CrowdFundChaincode) Query(stub shim.ChaincodeStubInterface, function st
                 jsonResp := "{\"Error\":\"Nil amount for " + account + "\"}"
                 return nil, errors.New(jsonResp)
         }
-   //     errUnmarshal:=json.Unmarshal(accountValueBytes,&information)
-     //   if errUnmarshal!=nil {
-       //         return nil,errUnmarshal
-       // }
-        //jsonResp := "{\"Name\":\"" + account + "\",\"qrcode\":\"" + information.qrcode + "\",\"count\":\"" + information.count + "\"}"
-        //fmt.Printf("Query Response:%s\n", jsonResp)
+      errUnmarshal:=json.Unmarshal(accountValueBytes,&information)
+       if errUnmarshal!=nil {
+                return nil,errUnmarshal
+        }
+        jsonResp := "{\"Name\":\"" + account + "\",\"qrcode\":\"" + information.qrcode + "\",\"count\":\"" + information.count + "\"}"
+        fmt.Printf("Query Response:%s\n", jsonResp)
         return accountValueBytes, nil
 }
 
