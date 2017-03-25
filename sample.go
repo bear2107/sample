@@ -128,7 +128,7 @@ func (t *CrowdFundChaincode) Query(stub shim.ChaincodeStubInterface, function st
         }
         jsonResp := "{\"Name\":\"" + account + "\",\"qrcode\":\"" + information.qrcode + "\",\"count\":\"" + information.count + "\"}"
         fmt.Printf("Query Response:%s\n", jsonResp)
-        return information.qrcode, nil
+        return accountValuesBytes, nil
 }
 
 func main() {
